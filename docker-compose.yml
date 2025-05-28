@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgis/postgis:17-3.4
+    container_name: postgres_tesis
+    environment:
+      POSTGRES_USER: seoony
+      POSTGRES_PASSWORD: 1q2w3e4r5
+      POSTGRES_DB: tesis
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

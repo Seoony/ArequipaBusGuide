@@ -1,0 +1,15 @@
+__pycache__
+db.sqlite3
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3-journal
+media
+schema.yml
+map.xml
+nodes.xml
+ways.xml
+relations.xml
+routes_with_coordinates.json
