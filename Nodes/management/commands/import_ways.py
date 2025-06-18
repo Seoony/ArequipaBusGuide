@@ -3,17 +3,18 @@ from Nodes.models import Node, Edge
 import xml.etree.ElementTree as ET
 from django.contrib.gis.geos import LineString
 import logging
+from django.contrib.gis.measure import Distance
 
 logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
-    help = 'Import edges from ways.xml file'
+    help = 'Import edges from filtered_ways.xml file'
 
     def add_arguments(self, parser):
         parser.add_argument(
             '--file',
             type=str,
-            default='ways.xml',
+            default='filtered_ways.xml',
             help='Path to the OSM ways XML file'
         )
 
@@ -57,15 +58,17 @@ class Command(BaseCommand):
                                 target_node.location
                             ], srid=4326)
                             
-                            # Calculate distance (in degrees)
-                            distance = source_node.location.distance(target_node.location)
+                            # Calculate distance in meters
+                            distance = line.length  # length is in degrees for SRID 4326
+                            # Convert to meters using geodetic length
+                            distance_m = line.transform(3857, clone=True).length  # Web Mercator meters
                             
                             # Create or update edge
                             Edge.objects.update_or_create(
                                 source=source_node,
                                 target=target_node,
                                 defaults={
-                                    'distance': distance,
+                                    'distance': distance_m,
                                     'geometry': line
                                 }
                             )

@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from Routes.views import RecommendRouteView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('recommend-route/', RecommendRouteView.as_view(), name='recommend-route'),
 ]

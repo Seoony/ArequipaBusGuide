@@ -8,8 +8,12 @@ local_settings.py
 db.sqlite3-journal
 media
 schema.yml
-map.xml
+map_15-6-25.xml
 nodes.xml
 ways.xml
 relations.xml
+filtered_ways.xml
+filtered_street_nodes.xml
 routes_with_coordinates.json
+*.json
+*.xml

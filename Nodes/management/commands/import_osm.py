@@ -7,13 +7,13 @@ import logging
 logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
-    help = 'Import OSM data from map.xml file'
+    help = 'Import OSM data from street_nodes.xml file'
 
     def add_arguments(self, parser):
         parser.add_argument(
             '--file',
             type=str,
-            default='map.xml',
+            default='street_nodes.xml',
             help='Path to the OSM XML file'
         )
 
