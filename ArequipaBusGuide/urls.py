@@ -15,10 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from Routes.views import RecommendRouteView
-
+from django.urls import path, include
+from Routes.urls import urlpatterns as routes_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('recommend-route/', RecommendRouteView.as_view(), name='recommend-route'),
+    path('routes/', include(routes_urls)),
 ]
