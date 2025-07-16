@@ -1,5 +1,5 @@
 # Base de Python
-FROM python:3.11-slim
+FROM FROM python:3.12.3-slim
 
 # Instalar dependencias del sistema necesarias para PostGIS y psycopg2
 RUN apt-get update && apt-get install -y \
