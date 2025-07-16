@@ -1,35 +1,28 @@
-# Base de Python
-FROM python:3.12.3-slim
+FROM ubuntu:22.04
 
-# Instalar dependencias del sistema necesarias para PostGIS y psycopg2
-RUN apt-get update && apt-get install -y \
-    gcc \
-    g++ \
-    libpq-dev \
-    gdal-bin \
-    binutils \
-    libproj-dev \
-    proj-data \
-    proj-bin \
-    libgdal-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-# Variables necesarias para que pip encuentre GDAL
+ENV DEBIAN_FRONTEND=noninteractive
+ENV GDAL_VERSION=3.8.4
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
+ENV PYTHONUNBUFFERED=1
 
-# Crear directorio de trabajo
+RUN apt-get update && apt-get install -y software-properties-common && \
+    add-apt-repository ppa:ubuntugis/ubuntugis-unstable && \
+    apt-get update && apt-get install -y \
+    gdal-bin libgdal-dev \
+    python3.12 python3.12-dev python3-pip \
+    libpq-dev postgresql-client \
+    build-essential
+
+# For pip GDAL compatibility with system-installed GDAL
+RUN ln -s /usr/bin/python3.12 /usr/local/bin/python && \
+    python -m pip install --upgrade pip
+
 WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar los archivos del proyecto
-COPY . /app
+COPY . .
 
-# Instalar dependencias Python
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-
-# Exponer el puerto por defecto de gunicorn
 EXPOSE 8080
-
-# Comando de inicio (puedes cambiar wsgi.py según la estructura de tu proyecto)
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "nombre_de_tu_proyecto.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "tu_proyecto.wsgi:application"]
