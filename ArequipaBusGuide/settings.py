@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-qmeny&jjfbeo5m6c%eklpd$3cl*kw59d&s_$pxff7+0163f5_p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'ArequipaBusGuide.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'tesis',
-        'USER': 'seoony',
-        'PASSWORD': '1q2w3e4r5',
-        'HOST': 'localhost',
+        'NAME': 'neondb',
+        'USER': 'neondb_owner',
+        'PASSWORD': 'npg_NC8lIeOERZ5q',
+        'HOST': 'ep-tiny-moon-a2ostagj-pooler.eu-central-1.aws.neon.tech',
         'PORT': '5432',
     }
 }
