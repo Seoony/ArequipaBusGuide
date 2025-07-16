@@ -21,4 +21,4 @@ COPY . .
 EXPOSE 8000
 
 # Comando para producción: gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "tu_proyecto.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "ArequipaBusGuide.wsgi:application"]
