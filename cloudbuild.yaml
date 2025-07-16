@@ -7,7 +7,9 @@ steps:
       - '-t'
       - >-
         $_AR_HOSTNAME/$_AR_PROJECT_ID/$_AR_REPOSITORY/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
-      - .
+       - .
+      - '-f'
+      - Dockerfile
     id: Build
 
   # Paso 2: Subir la imagen al Artifact Registry
