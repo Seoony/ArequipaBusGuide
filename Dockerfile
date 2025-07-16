@@ -2,9 +2,9 @@ FROM ghcr.io/osgeo/gdal:ubuntu-full-3.8.4
 
 # Instala Python 3.12, pip y dependencias del sistema
 RUN apt-get update && apt-get install -y \
-    python3.12 python3.12-dev python3-pip \
+    python3.10 python3.10-dev python3-pip \
     libpq-dev build-essential \
-    && ln -s /usr/bin/python3.12 /usr/local/bin/python \
+    && ln -s /usr/bin/python3.10 /usr/local/bin/python \
     && python -m pip install --upgrade pip
 
 # Establece directorio de trabajo
