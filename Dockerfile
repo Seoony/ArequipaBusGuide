@@ -17,8 +17,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia el código fuente de tu proyecto
 COPY . .
 
-# Expone el puerto (Cloud Run usa 8080 por defecto)
-EXPOSE 8080
+# Expone el puerto 
+EXPOSE 8000
 
 # Comando para producción: gunicorn
 CMD ["gunicorn", "--bind", "0.0.0.0:8080", "tu_proyecto.wsgi:application"]
